@@ -1,0 +1,54 @@
+L-arginine	arg__L_e	arg_L_e
+L-glutamine	gln__L_e	gln_L_e
+Glycine	gly_e	gly_e
+L-histidine	his__L_e	his_L_e
+L-isoleucine	ile__L_e	ile_L_e
+L-lysine	lys__L_e	lys_L_e
+L-leucine	leu__L_e	leu_L_e
+L-methionine	met__L_e	met_L_e
+L-proline	pro__L_e	pro_L_e
+L-tyrosine	tyr__L_e	tyr_L_e
+L-valine	val__L_e	val_L_e
+34dhphe	34dhphe_e	34dhphe_e
+3mlda	3mlda_e	3mlda_e
+5htrp	5htrp_e	5htrp_e
+5-oxoproline	5oxpro_c	5oxpro_e
+Adrenaline	adrnl_e	adrnl_e
+L-citrulline	citr__L_c	citr_L_e
+Creatine	creat_e	creat_e
+Dopamine	dopa_e	dopa_e
+L-cystin	cysi__L_e	Lcystin_e
+NH4	nh4_e	nh4_e
+Ornithine	orn_e	orn_e
+Sarcosine	sarcs_e	sarcs_e
+2-Oxoglutarate	akg_e	akg_e
+Citrate	cit_e	cit_e
+Fructose	fru_e	fru_e
+Galactose	gal_e	gal_e
+D-glucose	glc__D_e	glc_D_e
+Keratan sulfate I	ksi_e	ksi_e
+Lactose	lcts_e	lcts_e
+Succinate	succ_e	succ_e
+Aldosterone	aldstrn_e	aldstrn_e
+Cortisol	crtsl_c	crtsl_e
+Corticosterone	crtstrn_c	crtstrn_e
+Progesterone	Progesterone	prgstrn_e
+Acetoacetate	acac_e	acac_e
+Acetone	acetone_e	acetone_e
+Bhb	bhb_e	bhb_e
+C101crn	C101crn	c101crn_e
+Carnitine	crn_e	crn_e
+Cholesterol	chsterol_e	chsterol_e
+Leukotriene C4	leuktrC4_e	leuktrC4_e
+Leukotriene D4	leuktrD4_c	leuktrD4_e
+Phytanic acid	phyt_e	phyt_e
+Prostaglandin F2	prostgf2_e	prostgf2_e
+Tetdec2crn	Tetdec2crn	tetdec2crn_e
+Tetdece1crn	Tetdece1crn	tetdece1crn_e
+Deoxyuridine	duri_e	duri_e
+Hypoxanthine	hxan_e	hxan_e
+Orotate	orot_c	orot_e
+Uracil	ura_e	ura_e
+Urate	urate_e	urate_e
+Bilirubin	bilirub_e	bilirub_e
+B-Carotene	caro_e	caro_e
