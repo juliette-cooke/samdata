@@ -24,3 +24,14 @@
 #'     \item{IEM.short}{Short versions of the IEM names for figures}
 #' }
 "iem_names"
+
+#' Observed metabolite changes in IEM patients.
+#'
+#' A dataset containing the observed metabolite changes in patients from Fig3 of the Recon 2 article.
+#' 
+#' @format A data frame with 54 rows and 50 variables:
+#' \describe{
+#'     \item{Metab}{All 54 metabolites from Fig 3 of the Recon 2 article}
+#'     \item{IEM names}{All the other columns are the 49 IEMs from Fig 3 of the Recon 2 article}
+#' }
+"obs"
