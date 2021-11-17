@@ -9,12 +9,15 @@
 #' @param sdata An sdata list containing ko and wt dataframes
 #' @param seed A seed to set for reproducibility
 #' @importFrom magrittr %>%
+#' @importFrom stringr str_replace_all
+#' @importFrom dplyr select bind_cols rename_with mutate group_by summarise
+#' @importFrom tidyr gather
 #' @returns A "long" dataframe containing all diff samples for all metabolites
 #' @export
 calc_diff = function(sdata, seed = NA) {
-  load(file = "data/metab_names.rda")
   # Get metabs that are in the results
-  metabs = data.frame(par = colnames(sdata$ko)[str_replace_all(str_replace_all(colnames(sdata$ko),"\\(e\\)", ""), "EX_", )
+  metabs = data.frame(par = colnames(sdata$ko)[str_replace_all(str_replace_all(colnames(sdata$ko),"\\(e\\)", ""), "EX_",
+                                                               "")
                                                %in% str_replace_all(metab_names$Metab.Recon2v2.IDs, "_e", "")])
   # Store both naming conventions
   metabs$us = str_replace_all(str_replace_all(metabs$par,"(?<!\\(e\\))$", "_e"), "\\(e\\)", "_e")
@@ -58,6 +61,6 @@ calc_diff = function(sdata, seed = NA) {
 calc_zscore = function(diff, disease.code){
   zscore = diff %>%
     group_by(Metab) %>%
-    summarise(!!disease := mean(Value) / sd(Value))
+    summarise(!!disease.code := mean(Value) / sd(Value))
   return(zscore)
 }

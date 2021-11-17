@@ -1,2 +1,5 @@
 .Rproj.user
 inst/doc
+tests/test_plots
+tests/test_results
+local_test.R

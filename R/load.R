@@ -14,7 +14,6 @@
 #' @returns A list containing ko and wt dataframes of all samples
 #' @export
 load_sampling_results = function(indir, disease.code, single.wt = F, wt.file = NA) {
-  load(file="data/iem_names.rda")
   #disease.code="xaa"
   #indir="/home/juliette/these/data/IEM/sampling/results/wtopt_0_1_gzip_100000"
   # KO import
@@ -22,9 +21,9 @@ load_sampling_results = function(indir, disease.code, single.wt = F, wt.file = N
   # List all files in the dir
   ko.files = list.files(ko.dir)
   # Get the file corresponding to the input disease code
-  ko.file = ko.files[str_detect(ko.files, disease.code)]
+  ko.file = ko.files[stringr::str_detect(ko.files, disease.code)]
   # Get the corresponding disease name using the disease code
-  disease = iem_names$IEM.full.upper[match(str_sub(ko.file, start = 1, end = 3),iem_names$IEM.code)]
+  disease = iem_names$IEM.full.upper[match(stringr::str_sub(ko.file, start = 1, end = 3),iem_names$IEM.code)]
   
   # Read in the file
   ko = data.table::fread(paste0(ko.dir, ko.file))
@@ -42,7 +41,7 @@ load_sampling_results = function(indir, disease.code, single.wt = F, wt.file = N
     # List all files in the dir
     wt.files = list.files(wt.dir)
     # Get the file corresponding to the input disease code
-    wt.file = wt.files[str_detect(wt.files, disease.code)]
+    wt.file = wt.files[stringr::str_detect(wt.files, disease.code)]
     
     wt = data.table::fread(paste0(wt.dir, wt.file))
   }
@@ -51,9 +50,11 @@ load_sampling_results = function(indir, disease.code, single.wt = F, wt.file = N
   names(sdata) = c("ko","wt")
   sdata = lapply(sdata, as.data.frame)
   
-  # Fix an issue with how tetdece1crn & glucose are named
+  # Fix an issue with how certain metabolites are named
   sdata = lapply(sdata, function(x) {
     names(x)[names(x) =="EX_tetdece1crn"] = "EX_tetdece1crn(e)"
+    names(x)[names(x) =="EX_c101crn"] = "EX_c101crn(e)"
+    names(x)[names(x) =="EX_tetdec2crn"] = "EX_tetdec2crn(e)"
     names(x)[names(x) =="EX_glc(e)"] = "EX_glc_D(e)"
     x
     })

@@ -2,20 +2,28 @@
 % Please edit documentation in R/plot.R
 \name{plot_scale_heatmap}
 \alias{plot_scale_heatmap}
-\title{Plot a heatmap representation of WT vs KO sampling results}
+\title{Plot a generic scaled heatmap representation}
 \usage{
-plot_scale_heatmap(pred, title, outfile, squash = 0)
+plot_scale_heatmap(pred, obs, title, metab_order, condition_order, squash)
 }
 \arguments{
-\item{pred}{The dataframe with Metabs as rows and IEMs as columns, with Metabs as column 1}
+\item{pred}{The predicted dataframe with Metabs as rows and conditions as columns, with Metabs as column 1}
+
+\item{obs}{The observed dataframe with Metabs as rows and conditions as columns, with Metabs as column 1}
 
 \item{title}{The title to be used for the plot}
 
-\item{outfile}{The output path and filename for the plot}
+\item{metab_order}{The order in which to plot the metabolites (must match metabolites in Metabs)}
+
+\item{condition_order}{The order in which to plot the onditions (must match column names)}
 
 \item{squash}{Whether to squash extreme values (squash>0) or not (squash=0)}
 }
 \description{
-This functions plots a heatmap using previously calculated scores. It uses an existing observed dataset in order to
-reproduce Fig 3 from the Recon 2 article.
+Compare predicted and observed for any set of metabolites and KOs. You must provide both the pred and obs datasets.
+The first column of both obs and pred must be the "Metab" column.
+The other columns are the condition columns. The column names must match between obs and pred.
+Obs must contain "+1", "-1" and "00". Pred must be numeric.
+Conditions (column names) must match the ones in condition_order.
+Metabolites (first column) must match the ones in metab_order.
 }

@@ -8,6 +8,7 @@
 #'     \item{Metab.names}{The metabolite names}
 #'     \item{Metab.Recon1.IDs}{Metabolite IDs from Recon 1}
 #'     \item{Metab.Recon2v2.IDs}{Metabolite IDs from Recon 2.2}
+#'     \item{Metab.EX.IDs}{Metabolite IDs in the EX_xxx(e) format}
 #' }
 "metab_names"
 
