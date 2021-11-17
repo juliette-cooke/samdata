@@ -4,18 +4,16 @@
 \alias{plot_scale_heatmap_recon2}
 \title{Plot a heatmap representation of WT vs KO sampling results for Recon 2}
 \usage{
-plot_scale_heatmap_recon2(pred, title, outfile, squash = 0)
+plot_scale_heatmap_recon2(pred, title, squash = 0)
 }
 \arguments{
 \item{pred}{The dataframe with Metabs as rows and IEMs as columns, with Metabs as column 1}
 
 \item{title}{The title to be used for the plot}
 
-\item{outfile}{The output path and filename for the plot}
-
 \item{squash}{Whether to squash extreme values (squash>0) or not (squash=0)}
 }
 \description{
-This functions plots a heatmap using previously calculated scores. It uses an existing observed dataset in order to
-reproduce Fig 3 from the Recon 2 article.
+This function plots a heatmap using previously calculated scores. It uses an existing observed dataset in order to
+reproduce Fig 3 from the Recon 2 article. It's designed to take in raw output from calc_zscore.
 }
