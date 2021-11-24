@@ -64,3 +64,38 @@ calc_zscore = function(diff, disease.code){
     summarise(!!disease.code := mean(Value) / sd(Value))
   return(zscore)
 }
+
+
+#' Calculate a monte carlo p-value estimation
+#' 
+#' This function uses a z-score prediction table to estimate p-values using monte carlo estimation. It calculates
+#' the significance of a z-score compared to the metabolite's "normal behaviour" over multiple conditions. 
+#' 
+#' @param diff A dataframe containing Metabs as rows and conditions as columns
+#' @returns A dataframe containing estimated p-values for each predicted value
+#' @importFrom magrittr %>%
+#' @export
+calc_mc_pval = function(zscore.df){
+  zscore.df = read.csv("~/these/code/R/samdata/tests/test_results/pred.csv",check.names = F)
+  # Transpose the df so that metabs are columns
+  zscore.df.t = zscore.df %>% tibble::column_to_rownames("Metab") %>% t() %>% as.data.frame()
+  
+  pred.mc = lapply(zscore.df.t, FUN=function(x) {  # Each column (metab) is x
+    names(x) = rownames(zscore.df.t)
+    x = lapply(x, function(y) {  # Each value of the column is y
+      ifelse(y < 0, log2((sum(x<y)+1)/(length(x)+1)), -log2((sum(x>y)+1)/(length(x)+1)) )
+    })
+    x
+  })
+  # Unlist and turn into data frame:
+  temp = as.data.frame(apply(do.call(cbind, pred.mc), 2, unlist))
+  # Transpose back to the correct format
+  pred = temp  %>% t() %>% as.data.frame() %>% tibble::rownames_to_column("Metab") 
+
+  return(pred)
+}
+
+
+
+
+

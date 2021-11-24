@@ -4,7 +4,14 @@
 \alias{plot_scale_heatmap}
 \title{Plot a generic scaled heatmap representation}
 \usage{
-plot_scale_heatmap(pred, obs, title, metab_order, condition_order, squash)
+plot_scale_heatmap(
+  pred,
+  obs,
+  title = "Default title",
+  metab_order,
+  condition_order,
+  squash
+)
 }
 \arguments{
 \item{pred}{The predicted dataframe with Metabs as rows and conditions as columns, with Metabs as column 1}

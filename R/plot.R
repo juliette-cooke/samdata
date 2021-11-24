@@ -12,7 +12,8 @@
 #' @importFrom dplyr left_join
 #' @importFrom tidyr gather
 #' @export
-plot_scale_heatmap_recon2 = function(pred, title, squash=0){
+plot_scale_heatmap_recon2 = function(pred, title="Default title", squash=0){
+  # TODO: detect metab name format ####
   # Turn metab IDs into metab names
   pred$Metab = metab_names$Metab.names[match(pred$Metab, metab_names$Metab.EX.IDs)]
   # Make sure the IEM names are the correct form
@@ -51,7 +52,7 @@ plot_scale_heatmap_recon2 = function(pred, title, squash=0){
 #' @importFrom tidyr gather
 #' @import ggplot2
 #' @export
-plot_scale_heatmap = function(pred, obs, title, metab_order, condition_order, squash){
+plot_scale_heatmap = function(pred, obs, title="Default title", metab_order, condition_order, squash){
   # TODO: test with other datasets ####
   # TODO: check if obs needs to be +1 -1 00 ####
   
@@ -93,4 +94,87 @@ plot_scale_heatmap = function(pred, obs, title, metab_order, condition_order, sq
     ylab("IEMs")
   
   return(hm)
+}
+
+#' Plot a precision-recall curve for results outputted by stat_pr_curve
+#' 
+#' @param pr.re A data frame with a column for precision and a column for recall 
+#' @import ggplot2
+#' @importFrom magrittr %>%
+#' @importFrom tibble rownames_to_column
+#' @export
+plot_precision_recall_curve = function(pr.re, title="Default title", 
+                                       method = c("merge_pos", "separate_dir", "only_pos")) {
+  if (method == "merge_pos"){
+    pr.re.curve = pr.re %>% ggplot(aes(x = recall, y = precision))+
+      geom_line()+
+      xlim(c(0,1))+
+      ylim(c(0,1))+
+      theme_classic()+
+      ggtitle(title)
+  }else if (method == "separate_dir") {
+    pr.re.curve.inc = pr.re %>% ggplot(aes(x = recall_inc, y = precision_inc))+
+      geom_line()+
+      xlim(c(0,1))+
+      ylim(c(0,1))+
+      theme_classic()+
+      ggtitle(title)
+    
+    pr.re.curve.dec = pr.re %>% ggplot(aes(x = recall_dec, y = precision_dec))+
+      geom_line()+
+      xlim(c(0,1))+
+      ylim(c(0,1))+
+      theme_classic()+
+      ggtitle(title)
+    pr.re.curve = list(pr.re.curve.inc, pr.re.curve.dec)
+  }else if (method == "only_pos"){
+    pr.re = pr.re %>% rownames_to_column("Threshold")
+    pr.re[,1] = as.numeric(pr.re[,1])
+    pr.re.curve = pr.re %>% ggplot(aes(x = Threshold, y = accuracy))+
+      geom_line()+
+      ylim(c(0,1))+
+      theme_classic()+
+      ggtitle(title)
+  }
+
+  return(pr.re.curve)
+}
+
+#' Plot a ROC curve for results outputted by stat_roc_curve
+#' 
+#' @param roc A data frame with a column for FPR and a column for TPR 
+#' @import ggplot2
+#' @importFrom magrittr %>%
+#' @export
+plot_roc_curve = function(roc, title="Default title",method = c("merge_pos", "separate_dir", "only_pos")) {
+  #roc = pr.re
+  if (method == "merge_pos"){
+    roc.curve = roc %>% ggplot(aes(x = fpr, y = recall))+
+      geom_line()+
+      xlim(c(0,1))+
+      ylim(c(0,1))+
+      theme_classic()+
+      ggtitle(title)+
+      geom_abline(intercept = 0, slope = 1)
+  }else if (method == "separate_dir") {
+    roc.curve.inc = roc %>% ggplot(aes(x = fpr_inc, y = recall_inc))+
+      geom_line()+
+      xlim(c(0,1))+
+      ylim(c(0,1))+
+      theme_classic()+
+      ggtitle(title)+
+      geom_abline(intercept = 0, slope = 1)
+    
+    roc.curve.dec = roc %>% ggplot(aes(x = fpr_dec, y = recall_dec))+
+      geom_line()+
+      xlim(c(0,1))+
+      ylim(c(0,1))+
+      theme_classic()+
+      ggtitle(title)+
+      geom_abline(intercept = 0, slope = 1)
+    
+    roc.curve = list(roc.curve.inc, roc.curve.dec)
+  }else if (method == "only_pos"){
+  }
+  return(roc.curve)
 }

@@ -23,6 +23,7 @@ Imports:
     magrittr,
     ggplot2,
     stringr,
-    tidyr
+    tidyr,
+    tibble
 LazyData: true
 Config/testthat/edition: 3

@@ -4,7 +4,7 @@
 \alias{plot_scale_heatmap_recon2}
 \title{Plot a heatmap representation of WT vs KO sampling results for Recon 2}
 \usage{
-plot_scale_heatmap_recon2(pred, title, squash = 0)
+plot_scale_heatmap_recon2(pred, title = "Default title", squash = 0)
 }
 \arguments{
 \item{pred}{The dataframe with Metabs as rows and IEMs as columns, with Metabs as column 1}
